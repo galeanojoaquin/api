@@ -30,7 +30,7 @@ router.post("/send-mail", async (req, res) => {
   });
 
   transporter.use("compile", hbs(handlebarOptions));
-
+  
   const mailOptions = {
     from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
     to: email,

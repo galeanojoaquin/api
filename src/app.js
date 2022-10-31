@@ -1,8 +1,10 @@
-import express from "express"
-import morgan from "morgan"
-var cors = require('cors')
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const morgan = require('morgan');
+ 
 //Routes
-import mailingRoutes from "./routes/mailing.routes";
+const mailingRoutes = require ("./routes/mailing.routes");
 
 const app = express();
 
@@ -13,9 +15,10 @@ app.set("port", 4000);
 
 app.use(cors())
 app.use(morgan("dev")); 
+app.use(express.json());
 
 //Routes
-app.use(mailingRoutes);
+app.use('/mailer', mailingRoutes);
 
 
-export default app;
+module.exports = app;
