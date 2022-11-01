@@ -4,7 +4,10 @@ const path = require('path');
 const morgan = require('morgan');
  
 //Routes
-const mailingRoutes = require ("./routes/mailing.routes");
+const turnoConfirm = require ("./routes/licenciasTurnoConfirm.routes");
+const adminCancel = require ("./routes/licenciasAdminCancel.routes");
+const recoveryCode = require ("./routes/licenciasRecoveryCode.routes");
+const turnoCancel = require ("./routes/licenciasTurnoCancel.routes");
 
 const app = express();
 
@@ -18,7 +21,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //Routes
-app.use('/mailer', mailingRoutes);
+app.use('/mailer', turnoConfirm);
+app.use('/mailer', adminCancel);
+app.use('/mailer', recoveryCode);
+app.use('/mailer', turnoCancel);
 
 
 module.exports = app;

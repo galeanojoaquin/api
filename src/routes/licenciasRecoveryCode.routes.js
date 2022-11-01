@@ -4,10 +4,10 @@ const router = Router();
 const nodemailer = require("nodemailer");
 var hbs = require("nodemailer-express-handlebars");
 
-router.post("/send-mail", async (req, res) => {
+
+router.post("/turno-recovery-code", async (req, res) => {
   console.log(req.body);
-  const { nombre, documento, telefono, email, tramite, fecha, horario, sede, codigo } =
-    req.body;
+  const { codigo, email } = req.body;
 
   const handlebarOptions = {
     viewEngine: {
@@ -30,21 +30,13 @@ router.post("/send-mail", async (req, res) => {
   });
 
   transporter.use("compile", hbs(handlebarOptions));
-  
+
   const mailOptions = {
     from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
     to: email,
-    subject: "Municipalidad de Ituzaingó | Confirmación de turno",
-    template: "email",
+    subject: "Municipalidad de Ituzaingó | Código de turno",
+    template: "emailRecoveryCode",
     context: {
-      nombre: nombre,
-      documento: documento,
-      telefono: telefono,
-      email: email,
-      tramite: tramite,
-      fecha: fecha,
-      horario: horario,
-      sede: sede,
       codigo: codigo,
     },
   };
@@ -58,6 +50,5 @@ router.post("/send-mail", async (req, res) => {
     }
   });
 });
-
 
 module.exports = router;

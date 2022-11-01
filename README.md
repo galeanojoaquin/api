@@ -1,6 +1,6 @@
  API Node js.
 
-Esta es una aplicación web en Nodejs.
+Esta es una API en Nodejs.
 
 ### Requeriments
 
