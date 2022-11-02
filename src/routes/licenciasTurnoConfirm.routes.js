@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 var hbs = require("nodemailer-express-handlebars");
 
 router.post("/turno-confirm", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { nombre, documento, telefono, email, tramite, fecha, horario, sede, codigo } =
     req.body;
 
