@@ -1,8 +1,7 @@
 const path = require("path");
 
-console.log("hello world");
 
-class Mailer {
+class MailerServices {
     handlebarOptions = {
         viewEngine: {
           extName: ".handlebars",
@@ -42,5 +41,4 @@ class Mailer {
       };
 }
 
-const variable = new Mailer();
-console.log(variable);
+module.exports = MailerServices;
