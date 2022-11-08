@@ -2,10 +2,15 @@ const { Router } = require("express");
 const router = Router();
 
 const {
-    sendTurnoConfirm,
+    sendTurnConfirm,
+    sendTurnCancelledByCustomer,
+    sendTurnRecoveryCode,
+    sendTurnCancelledByAdmin,
 } = require("../controllers/mailer.controller");
 
-router.post("/turno-confirm", sendTurnoConfirm);
-
+router.post("/turnConfirm", sendTurnConfirm);
+router.post("/turnCancelledByCustomer", sendTurnCancelledByCustomer);
+router.post("/turnRecoveryCode", sendTurnRecoveryCode);
+router.post("/turnCancelledByAdmin", sendTurnCancelledByAdmin);
 
 module.exports = router;

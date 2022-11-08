@@ -1,7 +1,7 @@
 const path = require("path");
 const nodemailer = require("nodemailer");
 
-class NodeMailerrConfigService {
+class NodeMailerConfigService {
     getHandlebarOptions = {
         viewEngine: {
             extName: ".handlebars",
@@ -13,7 +13,7 @@ class NodeMailerrConfigService {
     };
 
 
-    seTmailOptions(nombre, documento, telefono, email, tramite, fecha, horario, sede, codigo) {
+    seTmailOptionsTurnConfirm(nombre, documento, telefono, email, tramite, fecha, horario, sede, codigo) {
         try {
             const mailOptions = {
                 from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
@@ -39,8 +39,47 @@ class NodeMailerrConfigService {
         }
     }
 
+    seTmailOptionsTurnCancellCustomer(nombre, email, tramite, fecha, codigo) {
+        try {
+            const mailOptions = {
+                from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
+                to: email,
+                subject: "Municipalidad de Ituzaingó | Cancelación de turno",
+                template: "emailCancelled",
+                context: {
+                    nombre: nombre,
+                    email: email,
+                    fecha: fecha,
+                    tramite: tramite,
+                    codigo: codigo,
+                },
+            };
+            return mailOptions;
+        } catch (error) {
+            return error
+        }
+    }
+
+    seTmailOptionsTurnRecoveryCode(email, codigo) {
+        try {
+            const mailOptions = {
+                from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
+                to: email,
+                subject: "Municipalidad de Ituzaingó | Código de turno",
+                template: "emailRecoveryCode",
+                context: {
+                    codigo: codigo,
+                },
+            };
+            return mailOptions;
+        } catch (error) {
+            return error
+        }
+    }
+
+
 
 }
 
 
-module.exports = NodeMailerrConfigService;
+module.exports = NodeMailerConfigService;
