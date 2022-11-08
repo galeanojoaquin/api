@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 var hbs = require("nodemailer-express-handlebars");
 const { MAIL, MAIL_PASSWORD } = require('../config');
 
-const NodeMailerConfigService = require("../services/ConfigNodeMailerServices");
+const MailerConfigService = require("../services/mailerConfigServices");
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const nodeMailerrConfigService = new NodeMailerConfigService();
+const nodeMailerrConfigService = new MailerConfigService();
 
 const sendTurnConfirm = async (req, res) => {
     const { nombre, documento, telefono, email, tramite, fecha, horario, sede, codigo } = req.body;
@@ -74,10 +74,10 @@ const sendTurnRecoveryCode = async (req, res) => {
 };
 
 const sendTurnCancelledByAdmin = async (req, res) => {
-    const { nombre, email, tramite, fecha, codigo } = req.body;
+    const { nombre, email, tramite, fecha, codigo, motivo } = req.body;
 
     const handlebarOptions = nodeMailerrConfigService.getHandlebarOptions;
-    const mailOptions = nodeMailerrConfigService.seTmailOptionsTurnCancellByCustomer(nombre, email, tramite, fecha, codigo);
+    const mailOptions = nodeMailerrConfigService.seTmailOptionsTurnCancellByAdmin(nombre, email, tramite, fecha, codigo, motivo);
 
     transporter.use("compile", hbs(handlebarOptions));
 

@@ -1,7 +1,7 @@
 const path = require("path");
 const nodemailer = require("nodemailer");
 
-class NodeMailerConfigService {
+class MailerConfigService {
     getHandlebarOptions = {
         viewEngine: {
             extName: ".handlebars",
@@ -39,7 +39,7 @@ class NodeMailerConfigService {
         }
     }
 
-    seTmailOptionsTurnCancellCustomer(nombre, email, tramite, fecha, codigo) {
+    seTmailOptionsTurnCancellByCustomer(nombre, email, tramite, fecha, codigo) {
         try {
             const mailOptions = {
                 from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
@@ -77,9 +77,29 @@ class NodeMailerConfigService {
         }
     }
 
-
+    seTmailOptionsTurnCancellByAdmin(nombre, email, tramite, fecha, codigo, motivo) {
+        try {
+            const mailOptions = {
+                from: "Municipalidad de ituzaingó <municipalidad@miituzaingo.gob.ar>", // sender address,
+                to: email,
+                subject: "Municipalidad de Ituzaingó | Cancelación de turno",
+                template: "emailCancelledAdmin",
+                context: {
+                    nombre: nombre,
+                    email: email,
+                    fecha: fecha,
+                    tramite: tramite,
+                    codigo: codigo,
+                    motivo: motivo,
+                },
+            };
+            return mailOptions;
+        } catch (error) {
+            return error
+        }
+    }
 
 }
 
 
-module.exports = NodeMailerConfigService;
+module.exports = MailerConfigService;
